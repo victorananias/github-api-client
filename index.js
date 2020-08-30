@@ -1,45 +1,61 @@
-const Github = require('github-api')
+const axios = require('axios')
 
 const token = 'bf438a3782dcf8a178376a64935ec812f279f913'
-const username = 'victorananias'
-
-const github = new Github({ token })
-
-const user = github.getUser()
 
 const name = '',
+  username = '',
   avatarUrl = '',
   projects = [],
   bio = '',
   company = '',
   programmingLanguages = [],
   topics = [],
-  contact = [];
+  contact = []
 
-// user.getProfile()
-//   .then(({ data }) => {
-//     const {
-//       name,
-//       avatar_url: avatarUrl,
-//       html_url: githubUrl,
-//       bio,
-//       location,
-//       blog,
-//       email,
-//       company
-//     } = data
-//     // console.log(Object.keys(data).join('\n'));
-//     console.log(data);
-//   })
-//   .catch(e => {
-//     console.log(e)
-//   })
+const apiUrl = 'https://api.github.com/graphql'
+const query = `
+  {
+    viewer {
+      login
+      name
+      bio
+      location
+      email
+      company
+      avatarUrl
+      bioHTML
+      isHireable
+      projectsUrl
+      twitterUsername
+      url
+      websiteUrl
+      pinnedItems(first: 6, types: REPOSITORY) {
+        nodes {
+          ... on Repository {
+            name
+            descriptionHTML
+            homepageUrl
+            createdAt
+            url
+            object(expression: "master:README.md") {
+              ... on Blob {
+                text
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+`
 
-user.listRepos()
-  .then(({ data }) => {
-    // const names = data.map(r => r.name).join(', ')
-    console.log(data[0]);
+axios
+  .post(apiUrl, { query }, { headers: { 'Authorization': `Bearer ${token}` } })
+  .then(({ data: { data } }) => {
+    console.log(
+      Object.keys(data)
+    )
   })
-  .catch(e => {
-    console.error(e)
+  .catch(error => {
+    console.log(error)
   })

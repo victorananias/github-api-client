@@ -9,6 +9,7 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
-    "github-api": "^3.3.0"
+    "axios": "^0.20.0",
+    "node-fetch": "^2.6.0"
   }
 }
