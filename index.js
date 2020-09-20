@@ -1,4 +1,4 @@
-const axios = require('axios')
+const $ = document.querySelector.bind(document)
 
 const token = 'bf438a3782dcf8a178376a64935ec812f279f913'
 
@@ -52,9 +52,11 @@ const query = `
 axios
   .post(apiUrl, { query }, { headers: { 'Authorization': `Bearer ${token}` } })
   .then(({ data: { data } }) => {
-    console.log(
-      Object.keys(data)
-    )
+    const { viewer } = data
+    console.log(viewer)
+    $('#nome').innerText = viewer.login
+    $('#avatar').src = viewer.avatarUrl
+    $('#avatar').alt = viewer.login
   })
   .catch(error => {
     console.log(error)
