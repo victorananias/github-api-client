@@ -1,17 +1,31 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Portifolio</title>
+  <link rel="stylesheet" href="style.css">
 </head>
+
 <body>
-  <main class="main">
-    <img id="avatar" style="width: 100px; border-radius: 0.2rem;">
-    <span id="nome"></span>
+  <main>
+    <section>
+      <img id="avatar">
+      <div>
+        <span id="name">name</span>
+        <span id="username">username</span>
+        <span id="company">company</span>
+      </div>
+    </section>
+    <section id="bio">
+      these are some things about me...
+    </section>
+    
   </main>
-  
+
   <script src="node_modules/axios/dist/axios.min.js"></script>
   <script src="index.js"></script>
 </body>
+
 </html>

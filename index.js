@@ -53,10 +53,9 @@ axios
   .post(apiUrl, { query }, { headers: { 'Authorization': `Bearer ${token}` } })
   .then(({ data: { data } }) => {
     const { viewer } = data
-    console.log(viewer)
-    $('#nome').innerText = viewer.login
+    
     $('#avatar').src = viewer.avatarUrl
-    $('#avatar').alt = viewer.login
+    console.log(viewer)
   })
   .catch(error => {
     console.log(error)
